@@ -2,35 +2,29 @@ const { build } = require('./build')
 const { getBaseurl } = require('./utils')
 const { promises: fsPromises } = require('fs')
 const finalhandler = require('finalhandler')
-const https = require('https')
+const http = require('http') // 1. 把 https 改成 http
 const livereload = require('livereload')
 const log = require('debug')('app:watch')
 const path = require('path')
 const serveStatic = require('serve-static')
 const watch = require('node-watch')
 
+// 這個函數現在不重要了，但保留它以免其他地方報錯
 async function readMkcert () {
-  try {
-    const [cert, key] = await Promise.all([
-      fsPromises.readFile(path.resolve(__dirname, 'mkcert/cert.pem')),
-      fsPromises.readFile(path.resolve(__dirname, 'mkcert/key.pem')),
-    ])
-    return { cert, key }
-  } catch (err) {
-    throw new Error('Failed to load mkcert. Please run "yarn mkcert" first.')
-  }
+  return null 
 }
 
 async function main () {
   const publicDir = path.resolve(__dirname, 'dist')
-  const baseurl = getBaseurl()
+  const baseurl = getBaseurl().replace('https://', 'http://') // 2. 強制把網址換成 http
   await build()
   log(`build finish. Visit: ${baseurl}`)
 
   const livereloadServer = livereload.createServer({
     delay: 1000,
     port: 3000,
-    server: https.createServer(await readMkcert(), async (req, res) => {
+    // 3. 這裡關鍵：把 https.createServer 改成 http.createServer，並移除 readMkcert()
+    server: http.createServer(async (req, res) => {
       serveStatic(publicDir, {
         index: ['index.html', 'index.htm'],
       })(req, res, finalhandler(req, res))

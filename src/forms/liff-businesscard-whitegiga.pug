@@ -1,0 +1,42 @@
+extends ../layout/layout.pug
+
+block content
+  #app.container.my-3(v-cloak)
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow-sm
+          .card-header.bg-primary.text-white.text-center
+            h4 建立長富營造電子名片
+          .card-body
+            //- 姓名與職稱
+            .row
+              .col-8.form-group
+                label(for='name') 姓名
+                input#name.form-control(v-model='form.name', type='text', placeholder='例如：王小明')
+              .col-4.form-group
+                label(for='title') 職稱
+                input#title.form-control(v-model='form.title', type='text', placeholder='例如：負責人')
+            
+            //- 聯絡電話
+            .form-group.mt-2
+              label(for='mobile') 行動電話
+              input#mobile.form-control(v-model='form.mobile', type='tel', placeholder='例如：0912 345 678')
+            
+            .row.mt-2
+              .col-6.form-group
+                label(for='company_tel') 公司電話
+                input#company_tel.form-control(v-model='form.company_tel', type='tel', placeholder='03-1234567')
+              .col-6.form-group
+                label(for='company_fax') 傳真
+                input#company_fax.form-control(v-model='form.company_fax', type='tel', placeholder='03-1234568')
+            
+            //- 電子信箱
+            .form-group.mt-2
+              label(for='email') 電子信箱
+              input#email.form-control(v-model='form.email', type='email', placeholder='service@example.com')
+            
+            hr.my-4
+            
+            button.btn.btn-primary.btn-lg.w-100(@click='submit') 
+              i.fas.fa-share-square.me-2
+              | 生成並分享名片
