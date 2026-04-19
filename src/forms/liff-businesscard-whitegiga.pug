@@ -11,7 +11,7 @@ block meta
   meta(property="og:image", content="https://raw.githubusercontent.com/wings70179/eccard/refs/heads/main/FJJ56x3v.png")
   meta(property="og:url", content=baseurl+"forms/liff-businesscard-whitegiga.html")
 
-block form
+block content
   .form-group.was-validated.my-2
     label(for="vcard-logo") LOGO
     input#vcard-logo.form-control.form-control-sm(type="url", inputmode="url", required, pattern="https://\\S+", v-model.trim="vcard.logo")
