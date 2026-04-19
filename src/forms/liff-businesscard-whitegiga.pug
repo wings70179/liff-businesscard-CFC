@@ -1,4 +1,4 @@
-extends ../../layout/default.pug
+extends ../../layout/forms.pug
 
 block beforehtml
   -
@@ -11,7 +11,7 @@ block meta
   meta(property="og:image", content="https://raw.githubusercontent.com/wings70179/eccard/refs/heads/main/FJJ56x3v.png")
   meta(property="og:url", content=baseurl+"forms/liff-businesscard-whitegiga.html")
 
-block content
+block form
   .form-group.was-validated.my-2
     label(for="vcard-logo") LOGO
     input#vcard-logo.form-control.form-control-sm(type="url", inputmode="url", required, pattern="https://\\S+", v-model.trim="vcard.logo")
@@ -61,7 +61,7 @@ block content
     input#vcard-email.form-control.form-control-sm(type="email", inputmode="email", required, pattern=".+", v-model="vcard.email")
     small.form-text.text-muted 請填寫公司信箱。
 
-block script
+block vue-config
   script.
     window.vueConfig.data.vcard = {
       address: '花蓮市建國路二段218號',
