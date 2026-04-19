@@ -45,7 +45,7 @@ block form
     textarea#vcard-maps.form-control.form-control-sm(inputmode="url", required, pattern="https?://\\S+", v-model="vcard.maps", rows="3")
     small.form-text.text-muted 請填寫公司的 Google 地圖網址。
   .form-group.was-validated.my-2
-    label(for="vcard-taxid")統編
+    label(for="vcard-taxid") 統編
     input#vcard-name.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.taxid")
     small.form-text.text-muted 請填寫統編。
   .form-group.was-validated.my-2
