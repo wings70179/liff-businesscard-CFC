@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>正在跳轉分享...</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <script>
+        (async () => {
+            const url = new URL(window.location.href);
+            // 處理 LINE 討厭的 liff.state 亂碼
+            const liffState = url.searchParams.get('liff.state');
+            if (liffState) {
+                const realSearchParams = liffState.includes('?') ? liffState.split('?')[1] : liffState.replace(/^\//, '');
+                if (realSearchParams) {
+                    window.location.href = window.location.origin + window.location.pathname + '?' + realSearchParams;
+                    return;
+                }
+            }
+            // 初始化你的 LIFF
+            await liff.init({ liffId: '2009809653-TJBASJtw' });
+            if (!liff.isLoggedIn()) {
+                liff.login();
+            } else {
+                console.log("LIFF Ready");
+            }
+        })();
+    </script>
+    <p style="text-align: center; margin-top: 20px;">正在啟動分享功能，請稍候...</p>
+</body>
+</html>
