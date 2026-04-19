@@ -13,53 +13,35 @@ block meta
 
 block form
   .form-group.was-validated.my-2
-    label(for="vcard-logo") LOGO
-    input#vcard-logo.form-control.form-control-sm(type="url", inputmode="url", required, pattern="https://\\S+", v-model.trim="vcard.logo")
-    small.form-text.text-muted 請填寫 LOGO 圖片網址，必須是 #[code https://] 開頭，比例為 #[code 1:1]，建議可將圖片#[a(target="_blank", href="https://hackmd.io/@docs/how_to_upload_image_tw") 上傳到 HackMD]。
+    label LOGO 圖片網址
+    input.form-control.form-control-sm(type="url", required, v-model.trim="vcard.logo")
   .form-group.was-validated.my-2
-    label(for="vcard-name") 姓名
-    input#vcard-name.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.name")
-    small.form-text.text-muted 請填寫姓名。
+    label 姓名
+    input.form-control.form-control-sm(type="text", required, v-model="vcard.name")
   .form-group.was-validated.my-2
-    label(for="vcard-title") 職稱
-    input#vcard-title.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.title")
-    small.form-text.text-muted 請填寫職稱。
+    label 職稱
+    input.form-control.form-control-sm(type="text", required, v-model="vcard.title")
   .form-group.was-validated.my-2
-    label(for="vcard-cellphone") 手機
-    input#vcard-title.form-control.form-control-sm(type="tel", inputmode="tel", required, pattern="[0-9,+-]+", v-model="vcard.cellphone")
-    small.form-text.text-muted 請填寫手機。
+    label 手機
+    input.form-control.form-control-sm(type="tel", required, v-model="vcard.cellphone")
   .form-group.was-validated.my-2
-    label(for="vcard-company") 公司
-    input#vcard-company.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.company")
-    small.form-text.text-muted 請填寫公司名稱。
+    label 公司名稱
+    input.form-control.form-control-sm(type="text", required, v-model="vcard.company")
   .form-group.was-validated.my-2
-    label(for="vcard-url") 網站
-    input#vcard-url.form-control.form-control-sm(type="url", inputmode="url", required, pattern="(https?://|line://|tel:|mailto:)\\S+", v-model.trim="vcard.url")
-    small.form-text.text-muted 請填寫公司網站。
+    label 地址
+    input.form-control.form-control-sm(type="text", required, v-model="vcard.address")
   .form-group.was-validated.my-2
-    label(for="vcard-address") 地址
-    input#vcard-address.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.address")
-    small.form-text.text-muted 請填寫公司地址。
+    label 統編
+    input.form-control.form-control-sm(type="text", required, v-model="vcard.taxid")
   .form-group.was-validated.my-2
-    label(for="vcard-maps") 地圖
-    textarea#vcard-maps.form-control.form-control-sm(inputmode="url", required, pattern="https?://\\S+", v-model="vcard.maps", rows="3")
-    small.form-text.text-muted 請填寫公司的 Google 地圖網址。
+    label 電話
+    input.form-control.form-control-sm(type="tel", required, v-model="vcard.tel")
   .form-group.was-validated.my-2
-    label(for="vcard-taxid") 統編
-    input#vcard-name.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.taxid")
-    small.form-text.text-muted 請填寫統編。
+    label 傳真
+    input.form-control.form-control-sm(type="text", v-model="vcard.fax")
   .form-group.was-validated.my-2
-    label(for="vcard-tel") 電話
-    input#vcard-tel.form-control.form-control-sm(type="tel", inputmode="tel", required, pattern="[0-9,+-]+", v-model="vcard.tel")
-    small.form-text.text-muted 請填寫公司電話。
-  .form-group.was-validated.my-2
-    label(for="vcard-fax") 傳真
-    input#vcard-tel.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.fax")
-    small.form-text.text-muted 請填寫公司傳真。
-  .form-group.was-validated.my-2
-    label(for="vcard-email") 信箱
-    input#vcard-email.form-control.form-control-sm(type="email", inputmode="email", required, pattern=".+", v-model="vcard.email")
-    small.form-text.text-muted 請填寫公司信箱。
+    label 信箱
+    input.form-control.form-control-sm(type="email", required, v-model="vcard.email")
 
 block vue-config
   script.
@@ -69,12 +51,12 @@ block vue-config
       email: 'a525367@yahoo.com.tw',
       logo: 'https://raw.githubusercontent.com/wings70179/eccard/refs/heads/main/0618_%E9%95%B7%E5%AF%8C%E7%87%9F%E9%80%A0%20-.jpg',
       maps: 'https://www.google.com/maps/search/?api=1&query=花蓮市建國路二段218號',
-      url: 'https://www.google.com/search?q=%E9%95%B7%E5%AF%8C%E7%87%9F%E9%80%A0%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&sca_esv=6bb65fbe9023ef87&sxsrf=ANbL-n7EFodmwAIutRSFkXzDkp3cq4wIYQ%3A1776520830297&source=hp&ei=fo7jafOAD-Hg2roP-4Wo4QY&iflsig=AFdpzrgAAAAAaeOcjiCYfyHnwCz5ef8wEwff3JZUSIBe&ved=0ahUKEwjzt5fox_eTAxVhsFYBHfsCKmwQ4dUDCCA&uact=5&oq=%E9%95%B7%E5%AF%8C%E7%87%9F%E9%80%A0%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&gs_lp=Egdnd3Mtd2l6Ihjplbflr4znh5_pgKDmnInpmZDlhazlj7hIlgJQAFgAcAB4AJABAJgBAKABAKoBALgBA8gBAPgBAvgBAZgCAKACAJgDAJIHAKAHALIHALgHAMIHAMgHAIAIAQ&sclient=gws-wiz',
       name: '廖冠宇',
       cellphone: '0935195881',
       taxid: '89386457',
       tel: '03-8525367',
       fax: '03-8534436',
-      template: 'https://wings70179.github.io/liff-businesscard-CFC/cards/liff-businesscard-whitegiga.txt'
+      template: 'https://wings70179.github.io/liff-businesscard-CFC/cards/liff-businesscard-whitegiga.txt',
       title: '負責人',
-    }
+      url: 'https://www.google.com'
+    };
