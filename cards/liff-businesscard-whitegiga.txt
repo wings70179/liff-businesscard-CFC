@@ -1,0 +1,197 @@
+<%
+function gaScreenView (vcard) {
+  const TEMPLATE_NAME = 'CheungFu-2026/04/19'
+  let hash = CryptoJS.HmacMD5(JSON.stringify(vcard), TEMPLATE_NAME)
+  hash = CryptoJS.enc.Base64.stringify(hash).replace(/[+/=]/g, c => _.get({ '+': '-', '/': '_', '=': '' }, c))
+  return gtag.mpCollectUrl({
+    client_id: gtagClientId,
+    events: [{
+      name: 'template_impression',
+      params: {
+        session_id: gtagSessionId,
+        share_by: profile.userId ?? 'unknown',
+        template_name: TEMPLATE_NAME,
+        vcard_hash: hash,
+        vcard_name: vcard.name,
+      },
+    }],
+  })
+}
+%>
+
+{
+  "altText": "請在手機上查看「${vcard.name}」的名片。",
+  "type": "bubble",
+  "size": "giga",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "paddingAll": "20px",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "vertical",
+        "flex": 5,
+        "contents": [
+          {
+            "type": "image",
+            "size": "md",
+            "aspectMode": "fit",
+            "aspectRatio": "1:1",
+            "gravity": "top",
+            "margin": "none",
+            "align": "start"
+            "url": "${vcard.logo}"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "contents": [
+              {
+                "type": "text",
+                "text": "${vcard.company}",
+                "weight": "bold",
+                "size": "lg",
+                "color": "#1A2D58",
+                "action": {
+                  "type": "uri",
+                  "label": "網頁",
+                  "uri": "${_.trim(vcard.url)}"
+                }
+              },
+              {
+                "type": "text",
+                "text": "${vcard.address}",
+                "size": "xs",
+                "color": "#1A2D58",
+                "margin": "xs",
+                "action": {
+                  "type": "uri",
+                  "label": "地址",
+                  "uri": "${_.trim(vcard.maps)}"
+                }
+              },
+              {
+                "type": "text",
+                "text": "${vcard.taxid}",
+                "size": "xs",
+                "color": "#1A2D58",
+                "margin": "xs"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "md",
+            "spacing": "xs",
+            "contents": [
+              {
+                "type": "text",
+                "text": "T : "${_.trim(vcard.tel)}",
+                "size": "xs",
+                "color": "#1A2D58",
+                "action": {
+                  "type": "uri",
+                  "label": "電話",
+                  "uri": "tel:${_.trim(vcard.tel)}"
+                }
+              },
+              {
+                "type": "text",
+                "text": "F : ${_.trim(vcard.fax)}",
+                "size": "xs",
+                "color": "#1A2D58"
+              },
+              {
+                "type": "text",
+                "text": "E : ${_.trim(vcard.email)}",
+                "size": "xs",
+                "color": "#1A2D58",
+                "action": {
+                  "type": "uri",
+                  "label": "信箱",
+                  "uri": "mailto:${_.trim(vcard.email)}"
+                },
+                "wrap": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "offsetTop": "45%",
+        "contents": [
+          {
+            "type": "separator",
+            "color": "#A2C0E6"
+          },
+          {
+            "type": "separator",
+            "color": "#A2C0E6",
+            "margin": "1px"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "${vcard.name}",
+                    "weight": "bold",
+                    "size": "lg",
+                    "color": "#1A2D58",
+                    "flex": 0,
+                    "wrap": true,
+                    "contents": [
+                      {
+                        "type": "span",
+                        "text": "${vcard.name}"
+                      },
+                      {
+                        "type": "span",
+                        "text": " ",
+                        "size": "xs"
+                      },
+                      {
+                        "type": "span",
+                        "text": "${vcard.title}",
+                        "size": "xs",
+                        "weight": "regular"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "${_.trim(vcard.cellphone)}",
+                "size": "md",
+                "color": "#1A2D58",
+                "margin": "xs",
+                "action": {
+                  "type": "uri",
+                  "label": "手機",
+                  "uri": "tel:${_.trim(vcard.cellphone)}"
+                }
+              }
+            ],
+            "offsetStart": "10px"
+          }
+        ],
+        "justifyContent": "center",
+        "position": "relative",
+        "paddingTop": "32%",
+        "flex": 3,
+        "height": "50%"
+      }
+    ]
+  }
+}
