@@ -12,36 +12,60 @@ block meta
   meta(property="og:url", content=baseurl+"forms/liff-businesscard-whitegiga.html")
 
 block form
-  .form-group.was-validated.my-2
-    label LOGO 圖片的網址
-    input.form-control.form-control-sm(type="url", required, v-model.trim="vcard.logo")
-  .form-group.was-validated.my-2
-    label 姓名
-    input.form-control.form-control-sm(type="text", required, v-model="vcard.name")
-  .form-group.was-validated.my-2
-    label 職稱
-    input.form-control.form-control-sm(type="text", required, v-model="vcard.title")
-  .form-group.was-validated.my-2
-    label 手機
-    input.form-control.form-control-sm(type="tel", required, v-model="vcard.cellphone")
-  .form-group.was-validated.my-2
-    label 公司名稱
-    input.form-control.form-control-sm(type="text", required, v-model="vcard.company")
-  .form-group.was-validated.my-2
-    label 地址
-    input.form-control.form-control-sm(type="text", required, v-model="vcard.address")
-  .form-group.was-validated.my-2
-    label 統編
-    input.form-control.form-control-sm(type="text", required, v-model="vcard.taxid")
-  .form-group.was-validated.my-2
-    label 電話
-    input.form-control.form-control-sm(type="tel", required, v-model="vcard.tel")
-  .form-group.was-validated.my-2
-    label 傳真
-    input.form-control.form-control-sm(type="text", v-model="vcard.fax")
-  .form-group.was-validated.my-2
-    label 信箱
-    input.form-control.form-control-sm(type="email", required, v-model="vcard.email")
+  //- 這裡一定要有 #app 這一層，不然 v-cloak 會讓你整個畫面消失
+  #app.container.my-3(v-cloak)
+    .row.justify-content-center
+      .col-md-6
+        .form-group.was-validated.my-2
+          label LOGO 圖片網址
+          input#vcard-logo.form-control.form-control-sm(type="url", inputmode="url", required, pattern="https://\\S+", v-model.trim="vcard.logo")
+          small.form-text.text-muted 請填寫 LOGO 圖片網址，必須是 #[code https://] 開頭。
+        
+        .form-group.was-validated.my-2
+          label 姓名
+          input#vcard-name.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.name")
+        
+        .form-group.was-validated.my-2
+          label 職稱
+          input#vcard-title.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.title")
+        
+        .form-group.was-validated.my-2
+          label 手機
+          input#vcard-cellphone.form-control.form-control-sm(type="tel", inputmode="tel", required, pattern="[0-9,+-]+", v-model="vcard.cellphone")
+        
+        .form-group.was-validated.my-2
+          label 公司名稱
+          input#vcard-company.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.company")
+        
+        .form-group.was-validated.my-2
+          label 網站
+          input#vcard-url.form-control.form-control-sm(type="url", inputmode="url", required, pattern="(https?://|line://|tel:|mailto:)\\S+", v-model.trim="vcard.url")
+        
+        .form-group.was-validated.my-2
+          label 地址
+          input#vcard-address.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.address")
+        
+        .form-group.was-validated.my-2
+          label 地圖網址
+          textarea#vcard-maps.form-control.form-control-sm(inputmode="url", required, v-model="vcard.maps", rows="3")
+        
+        .form-group.was-validated.my-2
+          label 統編
+          input#vcard-taxid.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.taxid")
+        
+        .form-group.was-validated.my-2
+          label 電話
+          input#vcard-tel.form-control.form-control-sm(type="tel", inputmode="tel", required, pattern="[0-9,+-]+", v-model="vcard.tel")
+        
+        .form-group.was-validated.my-2
+          label 傳真
+          input#vcard-fax.form-control.form-control-sm(type="text", required, pattern=".+", v-model="vcard.fax")
+        
+        .form-group.was-validated.my-2
+          label 信箱
+          input#vcard-email.form-control.form-control-sm(type="email", inputmode="email", required, pattern=".+", v-model="vcard.email")
+
+        button.btn.btn-primary.w-100.my-4(type="button", @click="submit") 建立並分享名片
 
 block vue-config
   script.
